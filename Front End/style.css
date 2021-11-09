@@ -38,7 +38,7 @@ nav .logo {
   font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 800;
-  font-size: 64px;
+  font-size: 50px;
   color: #021718;
 }
 
@@ -68,14 +68,15 @@ nav .logo {
 
 /* Header */
 .header-container {
-  background: #81B9D9 url("images/bg-shape1.svg");
-  background-repeat: no-repeat;
+  background: #81B9D9;
+  /* background-repeat: no-repeat; 
   background-position: right;
-  background-size: contain;
-  height: calc(100vh - 72px);
+  background-size: contain; 
+  */
+  height: calc(100vh - 72px); 
   display: flex;
   align-items: center;
-
+  
 }
 
 header {
@@ -84,6 +85,7 @@ header {
   justify-content: space-between;
 }
 
+/* This is Fonts Hi, (Head 1) */
 header h1 {
   font-weight: 900;
   font-size: 64px;
@@ -92,6 +94,7 @@ header h1 {
   margin-bottom: 24px;
 }
 
+/* This is Fonts Hi, (paragraph) */
 header p {
   font-size: 24px;
   line-height: 42px;
@@ -101,21 +104,6 @@ header p {
   margin-bottom: 48px;
 }
 
-header a {
-  color: #fffffa;
-  font-size: 24px;
-  text-decoration: none;
-
-  background: #01847f;
-  border-radius: 8px;
-  padding: 12px 48px;
-  display: inline-block;
-  transition: 300ms;
-}
-
-header a:hover {
-  transform: translateY(-8px);
-}
 
 /* Social Icons CENTER*/
 .social-icons{
