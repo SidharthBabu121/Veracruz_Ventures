@@ -1,0 +1,73 @@
+<!DOCUMENT html>
+    <html>
+
+    <head>
+
+        <title>Here is where the title goes</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <script>
+            $(function () {
+                var projects = [];
+                //$(document).ready(function () {
+                $.getJSON("http://127.0.0.1:5500/CSVdata.json", function (data) {
+                    //var projects = '';
+                    $.each(data.projects, function (i, f) {
+                        var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</td>' + '<td>' + f.organization + '</td>' + '<td>' + f.industry + '</td>' + '<td>' + f.abstract + '</td>' + '<td>' + f.studentNames + '</td>' + '</tr>'
+                        //});
+                        $(tblRow).appendTo("#projecttable tbody");
+                    });
+                });
+            });
+        </script>
+
+            <script>
+                $(document).ready(function () {
+                    var table = $('#projecttable').DataTable();
+
+                    $('#projecttable tbody').on('click', 'tr', function () {
+                        $(this).toggleClass('selected');
+                    });
+
+                    $('#button').click(function () {
+                        alert(table.rows('.selected').data().length + ' row(s) selected');
+                    });
+                });
+            </script>
+
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="profile">
+                <table id="projecttable" border="2">
+                    <thead>
+
+                        <!-- HEADING FORMATION -->
+                        <tr>
+                            <th>yearSemester</th>
+                            <th>class</th>
+                            <th>teamNumber</th>
+                            <th>teamName</th>
+                            <th>projectTitle</th>
+                            <th>organization</th>
+                            <th>industry</th>
+                            <th>abstract</th>
+                            <th>studentNames</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+    </body>
+
+    </html>

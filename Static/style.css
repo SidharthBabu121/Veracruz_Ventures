@@ -9,10 +9,11 @@ body {
 
 /* Navigation */
 .nav-container {
-  background: #fffffa;
+  /*background: #fffffa;*/
+  background-color: #81B9D9;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-  height: 72px;
-  margin-top: -65px;
+  height: 90px;
+  margin-top: 10px;
   z-index: 500;
   position: relative;
 }
@@ -73,7 +74,8 @@ nav .logo {
   background-position: right;
   background-size: contain; 
   */
-  height: calc(100vh - 72px); 
+  /*height: calc(100vh - 72px); */
+  height: 100px;
   display: flex;
   align-items: center;
   
@@ -119,7 +121,7 @@ header p {
   font-size: 24px;
   text-decoration: none;
 
-  background: #00A3FF;
+  background: #8da4b1;
   border-radius: 8px;
   padding: 12px 48px;
   display: inline-block;
