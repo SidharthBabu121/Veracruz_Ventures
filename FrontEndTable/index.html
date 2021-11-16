@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Search Engine</title>
+    <title> Live Search Engine</title>
+
 
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -14,17 +16,67 @@
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src=https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js></script>
+
+
     <script src=../../media/js/jquery.dataTables.js></script>
     
-    <link href="color-selected.css" rel="stylesheet" />
+    <link href="color-seleted.css" rel="stylesheet" />
 
-    <script src = "FrontEndTable/main.js" ></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#example").DataTable();
+
+            /* Add a click handler to the rows - this could be used as a callback */
+            $("#example tbody tr").click(function (e) { 
+                if ($(this).hasClass('row_selected')) {
+                    $(this).removeClass('row_selected');
+                }
+                else {
+                    oTable.$('tr.row_selected')// multiple selected  //.removeClass('row_selected'); 
+                    $(this).addClass('row_selected');
+                }
+            });
+
+            /* Add a click handler for the delete row */
+            $('#hide').click(function () {
+                var anSelected = fnGetSelected(oTable);
+                $(anSelected).hide();
+            });
+
+            $('#show').click(function () {
+                var anSelected = fnGetSelected(oTable);
+                $(anSelected).show();
+            });
+
+            $('#newsearch').click(function () {
+                $('table.display').DataTable();
+            });
+
+            /* Init the table */
+            oTable = $('#example').dataTable();
+
+            /* Get the rows which are currently selected */
+            function fnGetSelected(oTableLocal) {
+                return oTableLocal.$('tr.row_selected');
+            }
+
+
+        });
+
+        var oTable;
+    </script>
 
 </head>
+
+
+
 <body>
-    <h2> Live Search Engine</h2>
-    <button id="button">Hide selected row</button>
-    <table id="table" class="display" style="width:100%">
+    <button id='hide'>Hide Row</button>
+    <button id='show'>Show Row</button>
+    <button id='newsearch'>New Search</button>
+    <br /><br />
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example" style width = 100%>
         <thead>
             <tr>
                 <th>Name</th>
@@ -36,6 +88,30 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>2011/04/25</td>
+                <td>$320,800</td>
+            </tr>
+            <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>63</td>
+                <td>2011/07/25</td>
+                <td>$170,750</td>
+            </tr>
+            <tr>
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>San Francisco</td>
+                <td>66</td>
+                <td>2009/01/12</td>
+                <td>$86,000</td>
+            </tr>
             <tr>
                 <td>Cedric Kelly</td>
                 <td>Senior Javascript Developer</td>
@@ -324,6 +400,14 @@
                 <td>2009/02/14</td>
                 <td>$452,500</td>
             </tr>
+            <tr>
+                <td>Timothy Mooney</td>
+                <td>Office Manager</td>
+                <td>London</td>
+                <td>37</td>
+                <td>2008/12/11</td>
+                <td>$136,200</td>
+            </tr>
         </tbody>
         <tfoot>
             <tr>
@@ -336,5 +420,9 @@
             </tr>
         </tfoot>
     </table>
+
+    
+
 </body>
+
 </html>

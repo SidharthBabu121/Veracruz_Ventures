@@ -12,7 +12,7 @@ $(document).ready(function() {
 */
 
 
-
+var oTable;
 $(document).ready(function () {
     $("#example").DataTable();
 
@@ -53,4 +53,4 @@ $(document).ready(function () {
 
 });
 
-var oTable;
+

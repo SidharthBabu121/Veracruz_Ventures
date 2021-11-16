@@ -1,0 +1,6 @@
+.row_selected
+{
+    background-color: #8a8a99 
+    !important; 
+    z-index:9999
+}
