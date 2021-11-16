@@ -11,10 +11,9 @@ $(document).ready(function() {
 } );
 */
 
-
-var oTable;
 $(document).ready(function () {
-    $("#example").DataTable();
+
+    var oTable;
 
     /* Add a click handler to the rows - this could be used as a callback */
     $("#example tbody tr").click(function (e) {
@@ -22,10 +21,11 @@ $(document).ready(function () {
             $(this).removeClass('row_selected');
         }
         else {
-            oTable.$('tr.row_selected')// multiple selected  //.removeClass('row_selected'); 
+            oTable.$('tr.row_selected') //.removeClass('row_selected');
             $(this).addClass('row_selected');
         }
     });
+
 
     /* Add a click handler for the delete row */
     $('#hide').click(function () {
@@ -38,12 +38,11 @@ $(document).ready(function () {
         $(anSelected).show();
     });
 
-    $('#newsearch').click(function () {
-        $('table.display').DataTable();
-    });
 
     /* Init the table */
     oTable = $('#example').dataTable();
+
+
 
     /* Get the rows which are currently selected */
     function fnGetSelected(oTableLocal) {
@@ -52,5 +51,3 @@ $(document).ready(function () {
 
 
 });
-
-
