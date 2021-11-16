@@ -19,69 +19,16 @@
 
 <body>
 
-    <!--<div class="search-box">
-        <input type="text" placeholder="Search here..." />
-    </div>-->
-
     <div class="nav-container">
         <div class="wrapper">
             <nav>
                 <div class="logo" style="text-align: center; margin-left: 35%;">
                     Project Search
                 </div>
-
-                <!--<ul class="nav-items">
-                    <li>
-                        <a href="home.html">Home</a>
-                    </li>
-
-                    <li>
-                        <a href="library.html">Libary</a>
-                    </li>
-
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-
-                    <li>
-                        <a class="nav-btn-container" href="#">
-                            <img class="search-btn" src="images/search-icon.svg" alt="" />
-                            <img class="close-btn" src="images/close-icon.svg" alt="" />
-                        </a>
-                    </li>
-                </ul>
-            </nav>-->
         </div>
     </div>
-
-            <!--<div class="header-container">
-                <div class="wrapper">
-                  <header>
-                    <div class="hero-content"> 
-                      <h1>Hi, I'm a new MerchSearch</h1>
-                      <p>
-                        I Can put whatever here 
-                      </p>
-
-                    </div>
-                    
-                     PICTURES IMPORTING
-                    <div class="hero-image">
-                      <img src="images/photo6.png" alt="" />
-                      <div class="photo5-bg"></div>
-                    </div>
-                    
-                  </header>
-          
-        
-
-                  <div class="button">
-                    <a href="#s1"><button class="button">Hover Over Me</button></a>
-                    <a href="#s2"><button class="button">Hover Over Me2</button></a> 
-                    
-                  </div>
-                </div>
-            </div>-->
+            
+            <br /><br />
                     <div class="container">
                       <table id="example" style="width:100%" border="1" align="center">
                         <thead>
@@ -106,14 +53,14 @@
           <!--<script src="main.js"></script> -->
 <div class="header-container">
   <div class="wrapper">
-          <div class="social-icons">
-            <a href="#s">Show</a>
-            <a href="#h">Hide</a>
-            <a href="#m">Merge</a>
-            <a href="#ns">New Search</a>
-          </div>
-        </div>
-      </div>
+    <div class="social-icons">
+      <a id='hide'>Hide Row</a>
+      <a id='show'>Show Row</a>
+      <a>Merge</a>
+      <a id='newsearch'>New Search</a>
+    </div>
+  </div>
+</div>
     
 </body>
 
@@ -132,8 +79,41 @@
       });
       /*DataTables instantiation.*/
       $("#example").DataTable();
+      $("#example tbody tr").click(function (e) {
+        if ($(this).hasClass('row_selected')) {
+          $(this).removeClass('row_selected');
+        }
+        else {
+          oTable.$('tr.row_selected')// multiple selected  //.removeClass('row_selected'); 
+          $(this).addClass('row_selected');
+        }
+      });
+
+      /* Add a click handler for the delete row */
+      $('#hide').click(function () {
+        var anSelected = fnGetSelected(oTable);
+        $(anSelected).hide();
+      });
+
+      $('#show').click(function () {
+        var anSelected = fnGetSelected(oTable);
+        $(anSelected).show();
+      });
+
+      $('#newsearch').click(function () {
+        $('table.display').DataTable();
+      });
+
+      /* Init the table */
+      oTable = $('#example').dataTable();
+
+      /* Get the rows which are currently selected */
+      function fnGetSelected(oTableLocal) {
+        return oTableLocal.$('tr.row_selected');
+      }
     });
 
   });
+  var oTable;
 
 </script>
