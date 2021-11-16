@@ -28,7 +28,7 @@ $(document).ready(function () {
 
 
     /* Add a click handler for the delete row */
-    $('#delete').click(function () {
+    $('#hide').click(function () {
         var anSelected = fnGetSelected(oTable);
         $(anSelected).hide();
     });
