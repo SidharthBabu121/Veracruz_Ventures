@@ -1,0 +1,199 @@
+/* BEGGIN --->>> OF NAVIGATE HEADER */
+/* Default styles for the browser */
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    font-family: montserrat;
+}
+
+/* Navigate Header Color */
+nav{
+    height: 80px;
+    width: 100%;
+    background: #41a9ff;
+}
+label.logo{
+    font-size: 35px;
+    font-weight: bold;
+    color: White;
+    padding: 0 100px;
+    line-height: 80px;
+}
+nav ul{
+    float: right;
+    margin-right: 40px;
+}
+nav li{
+    display: inline-block;
+    margin: 0 8px;
+    line-height: 80px;
+}
+
+/* List of Home and About Color */
+nav a{
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    padding: 7px 10px;
+    border-radius: 3px;
+}
+
+/* Effect of Button */
+a.active,a:hover{
+    border: 1px solid rgb(0, 22, 146);
+    transition: .5s;
+}
+
+
+nav #icon{
+    color: white;
+    font-size: 30px;
+    line-height: 80px;
+    float: right;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+@media (max-width: 1048px){
+    label.logo{
+        font-size: 32px;
+        padding-left: 60px;
+    }
+    nav ul{
+        margin-right: 20px;
+    }
+    nav a{
+        font-size: 17px;
+    }
+}
+@media (max-width: 909px){
+    nav #icon{
+        display: block;
+    }
+    nav ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #2f3640;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    nav a{
+        font-size: 20px;
+    }
+    a.active,a:hover{
+        border: none;
+        color: #3498db
+    }
+    nav ul.show{
+        left: 0;            
+    }
+
+}
+
+/* Section have to be same with Navigate Color */
+section{
+    background-color: #41a9ff;
+    background-size: cover;
+    height: 1px;
+} 
+
+/* ENDING --->>> OF NAVIGATE HEADER */
+/* ================================ */
+
+/* Middle Body Content into Middle */
+.wrapper {
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+/* Header */
+.header-container {
+    background: #41a9ff;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+    height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+  
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  header h1 {
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 75px;
+    color: #021718;
+    margin-bottom: 24px;
+  }
+  
+  header p {
+    font-size: 24px;
+    line-height: 42px;
+    color: #021718;
+    width: 418px;
+  
+    margin-bottom: 48px;
+  }
+  
+  header a {
+    color: #fffffa;
+    font-size: 24px;
+    text-decoration: none;
+  
+    background: #01847f;
+    border-radius: 8px;
+    padding: 12px 48px;
+    display: inline-block;
+    transition: 300ms;
+  }
+  
+  header a:hover {
+    transform: translateY(-8px);
+  }
+
+
+
+
+/* Social Icons CENTER*/
+.social-icons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Social Icons */
+  .social-icons a {
+    margin: 0 auto;
+    color: #fffffa;
+    font-size: 15px;
+    text-decoration: none;
+  
+    background: #41a9ff;
+    border-radius: 80px;
+    padding: 12px 48px;
+    display: inline-block;
+    transition: 300ms;
+  }
+  
+  .social-icons a:hover {
+    background-color: #9abeeb;
+  }

@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html> 
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Live Search Engine</title>
+    <title>Responsive Navbar</title>
+
+    <!-- This is the STYLE for the HEADER -->
+    <!-- w3school AND https://code.jquery.com/ -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#icon').click(function(){
+                $('ul').toggleClass('show');
+            });
+        });
+    </script>
+
 
 
     <!-- jquery -->
@@ -17,22 +31,52 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src=https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js></script>
 
+
     <script src=../../media/js/jquery.dataTables.js></script>
     
-    <link href="color-seleted.css" rel="stylesheet" />
+    <link href="rowSeleted.css" rel="stylesheet" />
 
     <script src="main.js"></script>
+
+
+
+
+
+
+
 
 </head>
 
 
-
 <body>
-    <button id='hide'>Hide Row</button>
-    <button id='show'>Show Row</button>
-    <button id='newsearch'>New Search</button>
-    <br /><br />
-    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example" style width = 100%>
+
+   <nav>
+       <label class="logo">Live Search Engine</label>
+       <ul>
+        <div class="active">
+            <li><a href="home.html" >Home</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="search.html">Search</a></li>
+        </div>
+
+       </ul>
+        <!-- 3 bars Right Side -->
+       <label id="icon">
+           <i class="fas fa-bars"></i>
+       </label>
+   </nav>
+   <!-- <section></section> -->
+
+
+
+
+
+
+    
+
+   <br /><br />
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
         <thead>
             <tr>
                 <th>Name</th>
@@ -375,9 +419,16 @@
                 <th>Salary</th>
             </tr>
         </tfoot>
+
     </table>
 
-    
+    <div class="social-icons">
+        <a button class="hide" id='hide'>Hide Row</button> </a>
+        <a button class="show" id='show'>Show Row</button> </a>
+        <a button class="merge" id='merge'>Merge</button> </a>
+        <a button class="newsearch" id='newsearch'>New Search</button> </a>
+    </div>
+
 
 </body>
 
