@@ -1,17 +1,14 @@
-/*
-$(document).ready(function() {
-    var table = $('#table').DataTable();
+// $(document).ready(function () {
 
-    $('#table tbody').on( 'click', 'tr', function () {
-        $(this).toggleClass('selected');
-    } );
-    $('#table').click( function () {
-        alert( table.rows('.selected').data().length +' row(s) selected to Hide' );
-    } );
-} );
-*/
-
-$(document).ready(function () {
+    $(function () {
+        var projects = [];
+        //$(document).ready(function () {
+        $.getJSON("http://127.0.0.1:5500/CSVdata.json", function (data) {
+          $.each(data.projects, function (i, f) {
+            var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</td>' + '<td>' + f.organization + '</td>' + '<td>' + f.industry + '</td>' + '<td>' + f.abstract + '</td>' + '<td>' + f.studentNames + '</td>' + '</tr>'
+            //});
+            $(tblRow).appendTo("#example tbody");
+          });
 
     var codeBlock = '<br></br>'+
     '<table id="table1" class="display" >' +
@@ -44,9 +41,9 @@ $(document).ready(function () {
         document.getElementById("second-table-will-display-here").innerHTML = codeBlock
         $('#table1').DataTable();
     });
+    
 
-    var oTable;
-
+    
     /* Add a click handler to the rows - this could be used as a callback */
     $("#example tbody tr").click(function (e) {
         if ($(this).hasClass('row_selected')) {
@@ -54,45 +51,45 @@ $(document).ready(function () {
         }
         else {
             oTable.$('tr.row_selected') //.removeClass('row_selected');
-            $(this).addClass('row_selected');
+            $(this).addClass('row_selected'); 
         }
     });
 
-
     // HIDE FUNCTION
-    /* Add a click handler for the hide row */
+    /* Add a click handler for the delete row */
     $('#hide').click(function () {
         var anSelected = fnGetSelected(oTable);
         $(anSelected).hide();
-        //$("tr:not(.row_selected,.temp)").hide(); //This is MAYBE can be Merge
+        //$("tr:not(.row_selected,.temp)").hide();
     });
 
     // SHOW FUNCTION
     $('#show').click(function () {
         var anSelected = fnGetSelected(oTable);
         $(anSelected).show();
-        //$("tr:not(.row_selected,.temp)").show(); // This is MAYBE can be Merge
+        //$("tr:not(.row_selected,.temp)").show();
+        
     });
 
     // MERGE FUNCTION
     $('#merge').click(function () {
         var anSelected = fnGetSelected(oTable);
-        $(anSelected).show();
+        //$(anSelected).hide();
         $("tr:not(.row_selected,.temp)").hide();
     });
-
 
     /* Init the table */
     oTable = $('#example').dataTable({
         stateSave: true
     });
 
-
-
     /* Get the rows which are currently selected */
     function fnGetSelected(oTableLocal) {
         return oTableLocal.$('tr.row_selected');
     }
-
+    
 
 });
+});
+
+var oTable;
