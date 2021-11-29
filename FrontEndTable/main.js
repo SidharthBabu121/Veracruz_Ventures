@@ -31,16 +31,20 @@ $(document).ready(function () {
     $('#hide').click(function () {
         var anSelected = fnGetSelected(oTable);
         $(anSelected).hide();
+        //$("tr:not(.row_selected,.temp)").hide(); //This is MAYBE can be Merge
     });
 
     $('#show').click(function () {
         var anSelected = fnGetSelected(oTable);
         $(anSelected).show();
+        //$("tr:not(.row_selected,.temp)").show(); // This is MAYBE can be Merge
     });
 
 
     /* Init the table */
-    oTable = $('#example').dataTable();
+    oTable = $('#example').dataTable({
+        stateSave: true
+    });
 
 
 

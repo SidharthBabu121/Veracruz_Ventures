@@ -4,3 +4,13 @@
     !important; 
     z-index:9999
 }
+
+table.dataTable.display tbody tr.row_selected.even>.sorting_1,
+table.dataTable.order-column.hover tbody tr:hover>.sorting_1 {
+    background-color: #41a9ff;
+}
+
+table.dataTable.display tbody tr.row_selected.odd>.sorting_1,
+table.dataTable.order-column.hover tbody tr:hover>.sorting_1 {
+    background-color: #41a9ff;
+}

@@ -43,9 +43,9 @@ nav a{
     border-radius: 3px;
 }
 
-/* Effect of Button */
+/* Effect of Button on header */
 a.active,a:hover{
-    border: 1px solid rgb(0, 22, 146);
+    border: 1px solid white;
     transition: .5s;
 }
 
@@ -180,8 +180,8 @@ section{
     justify-content: space-between;
   }
   
-  /* Social Icons */
-  .social-icons a {
+  /* Social Icons 
+  .social-icons button {
     margin: 0 auto;
     color: #fffffa;
     font-size: 15px;
@@ -194,6 +194,35 @@ section{
     transition: 300ms;
   }
   
-  .social-icons a:hover {
+  .social-icons button:hover {
     background-color: #9abeeb;
+    color: white;
   }
+*/
+
+
+.social-icons button {
+  background-color: #41a9ff; 
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0 auto;
+  transition-duration: 0.4s;
+  cursor: pointer;
+} 
+
+.social-icons button {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #41a9ff;
+}
+
+.social-icons button:hover  {
+  background-color: #41a9ff;
+  color: white;
+}
+
