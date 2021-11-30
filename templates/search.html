@@ -1,64 +1,170 @@
-<!DOCUMENT html>
+<!DOCTYPE html>
+
 <html>
-    <head>
-        
-        <title>Project Search</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>   
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-            
-         <link rel="shortcut icon" href="#">
-        
-    </head>
 
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
 
-            <br /><br />
-    <div class="container">
-            <table id="example" class="display" style="width:100%">
-                <thead>
-                    <!-- HEADING FORMATION -->
-                    <tr>
-                        <th>yearSemester</th>
-                        <th>class</th>
-                        <th>teamNumber</th>
-                        <th>teamName</th>
-                        <th>projectTitle</th>
-                        <th>organization</th>
-                        <th>industry</th>
-                        <th>abstract</th>
-                        <th>studentNames</th>
-                    </tr>
-                </thead>
-                     <tbody>
-                                    
-                    </tbody>
-                </table>
-        </div>
-    </body>
+    <!-- This is the STYLE for the HEADER -->
+    <!-- w3school AND https://code.jquery.com/ -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- Data Table -->
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src=https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js></script>
+
+
+    <!-- <script src=../../media/js/jquery.dataTables.js></script>-->
+
+    <link href="/static/rowSeleted.css" rel="stylesheet" />
+
+    <!--<script src="/static/main.js"></script>-->
+
+
+    <script>
+        $(document).ready(function () {
+            $('#icon').click(function () {
+                $('ul').toggleClass('show');
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <nav>
+        <label class="logo">Live Search Engine</label>
+        <ul>
+            <div class="active">
+                <li><a href="\">Home</a></li>
+                <li><a href="\contact">Contact</a></li>
+                <li><a href="\about">About</a></li>
+                <li><a href="\search">Search</a></li>
+            </div>
+
+        </ul>
+        <!-- 3 bars Right Side -->
+        <label id="icon">
+            <i class="fas fa-bars"></i>
+        </label>
+    </nav>
+    <!-- <section></section> -->
+
+    <br /><br />
+    <!-- cellpadding="0" cellspacing="0"-->
+    <!-- <div class="container">-->
+    <table cellpadding="0" cellspacing="0" border="1" id="example" class="display" style="width:100%">
+        <thead>
+            <!-- HEADING FORMATION -->
+            <tr>
+                <th>yearSemester</th>
+                <th>class</th>
+                <th>teamNumber</th>
+                <th>teamName</th>
+                <th>projectTitle</th>
+                <th>organization</th>
+                <th>industry</th>
+                <th>abstract</th>
+                <th>studentNames</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <!-- </div>-->
+
+
+    <div class="social-icons">
+        <a button class="hide" id='hide'>Hide Row</button> </a>
+        <a button class="show" id='show'>Show Row</button> </a>
+        <a button class="merge" id='merge'>Merge</button> </a>
+        <a button class="newsearch" id='newsearch'>New Search</button> </a>
+    </div>
+
+
+</body>
+
 </html>
 
-        <script>
+<script>
 
-                $(function () {
-                    var projects = [];
-                    //$(document).ready(function () {
-                    $.getJSON("http://127.0.0.1:5500/CSVdata.json", function (data) {
-                        $.each(data.projects, function (i, f) {
-                            var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</td>' + '<td>' + f.organization + '</td>' + '<td>' + f.industry + '</td>' + '<td>' + f.abstract + '</td>' + '<td>' + f.studentNames + '</td>' + '</tr>'
-                            //});
-                            $(tblRow).appendTo("#example tbody");
-                        });
-                        /*DataTables instantiation.*/
-                        $("#example").DataTable();
+    $(function () {
+        var projects = [];
+        //$(document).ready(function () {
+        $.getJSON("http://127.0.0.1:5500/CSVdata.json", function (data) {
+            $.each(data.projects, function (i, f) {
+                var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</td>' + '<td>' + f.organization + '</td>' + '<td>' + f.industry + '</td>' + '<td>' + f.abstract + '</td>' + '<td>' + f.studentNames + '</td>' + '</tr>'
+                //});
+                $(tblRow).appendTo("#example tbody");
+            });
+            /*DataTables instantiation.*/
+            //$("#example").DataTable();
+            var oTable;
 
-                    });
+            /* Add a click handler to the rows - this could be used as a callback */
+            $("#example tbody tr").click(function (e) {
+                if ($(this).hasClass('row_selected')) {
+                    $(this).removeClass('row_selected');
+                }
+                else {
+                    oTable.$('tr.row_selected') //.removeClass('row_selected');
+                    $(this).addClass('row_selected');
+                }
+            });
 
-                });
 
-        </script> 
+            /* Add a click handler for the delete row */
+            $('#hide').click(function () {
+                var anSelected = fnGetSelected(oTable);
+                $(anSelected).hide();
+            });
+
+            $('#show').click(function () {
+                var anSelected = fnGetSelected(oTable);
+                $(anSelected).show();
+            });
+
+            //$('#newsearch').click(function () {
+            /*<button onclick="myFunction()">New Search</button>
+ 
+                //$('table.display').DataTable();
+                //console.log("It worked!");
+ 
+                function myFunction() {
+                    var x = document.getElementById("example");
+                    //x.deleteRow(0);
+                    //$('#example').DataTable();
+                    $('table.display').DataTable();
+                    console.log("It worked!");
+                }*/
+
+
+            /* Init the table */
+            oTable = $('#example').dataTable();
+
+
+
+            /* Get the rows which are currently selected */
+            function fnGetSelected(oTableLocal) {
+                return oTableLocal.$('tr.row_selected');
+            }
+
+
+        });
+
+    });
+
+</script>
