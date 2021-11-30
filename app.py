@@ -14,7 +14,17 @@ def home():
 @app.route('/search', methods = ['GET', 'POST'])
 def search():
     #return 0
-    return render_template('search.html')
+    return render_template('searchTwoTables.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
 
 @app.route('/delete')
 def deletedResults():

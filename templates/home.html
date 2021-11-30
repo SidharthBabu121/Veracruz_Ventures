@@ -11,8 +11,7 @@
   <!-- w3school AND https://code.jquery.com/ -->
   <link rel="stylesheet" href="/static/style.css">
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script>
     $(document).ready(function () {
       $('#icon').click(function () {
@@ -34,7 +33,7 @@
   <script src=https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js></script>
 
 
-  <!--<script src=../../media/js/jquery.dataTables.js></script>-->
+  <script src=../../media/js/jquery.dataTables.js></script>
 
   <link href="/static/rowSeleted.css" rel="stylesheet" />
 
@@ -54,15 +53,15 @@
 
   <nav>
     <label class="logo">Live Search Engine</label>
-    <ul>
-      <div class="active">
-        <li><a href="\">Home</a></li>
-        <li><a href="\contact">Contact</a></li>
-        <li><a href="\about">About</a></li>
-        <li><a href="\search">Search</a></li>
-      </div>
-
-    </ul>
+        <ul>
+          <div class="active">
+            <li><a href="\">Home</a></li>
+            <li><a href="\contact">Contact</a></li>
+            <li><a href="\about">About</a></li>
+            <li><a href="\search">Search</a></li>
+          </div>
+        
+        </ul>
     <!-- 3 bars Right Side -->
     <label id="icon">
       <i class="fas fa-bars"></i>
@@ -94,56 +93,3 @@
 </body>
 
 </html>
-
-<script>
-
-  $(function () {
-    var projects = [];
-    //$(document).ready(function () {
-    $.getJSON("http://127.0.0.1:5500/CSVdata.json", function (data) {
-      $.each(data.projects, function (i, f) {
-        var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</td>' + '<td>' + f.organization + '</td>' + '<td>' + f.industry + '</td>' + '<td>' + f.abstract + '</td>' + '<td>' + f.studentNames + '</td>' + '</tr>'
-        //});
-        $(tblRow).appendTo("#example tbody");
-      });
-
-      /*DataTables instantiation.*/
-      $("#example").DataTable();
-      $("#example tbody tr").click(function (e) {
-        if ($(this).hasClass('row_selected')) {
-          $(this).removeClass('row_selected');
-        }
-        else {
-          oTable.$('tr.row_selected')// multiple selected  //.removeClass('row_selected'); 
-          $(this).addClass('row_selected');
-        }
-      });
-
-      /* Add a click handler for the delete row */
-      $('#hide').click(function () {
-        var anSelected = fnGetSelected(oTable);
-        $(anSelected).hide();
-      });
-
-      $('#show').click(function () {
-        var anSelected = fnGetSelected(oTable);
-        $(anSelected).show();
-      });
-
-      $('#newsearch').click(function () {
-        $('table.display').DataTable();
-      });
-
-      /* Init the table */
-      oTable = $('#example').dataTable();
-
-      /* Get the rows which are currently selected */
-      function fnGetSelected(oTableLocal) {
-        return oTableLocal.$('tr.row_selected');
-      }
-    });
-
-  });
-  var oTable;
-
-</script>
