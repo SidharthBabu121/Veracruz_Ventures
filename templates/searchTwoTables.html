@@ -155,59 +155,23 @@
             </div>
             <script> $('#thirdClick').hide();</script>
 
-                <div id='fourthClick'>
-                    <table id="example" border="1" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>yearSemester</th>
-                                <th>class</th>
-                                <th>teamNumber</th>
-                                <th>teamName</th>
-                                <th>projectTitle</th>
-                                <th>organization</th>
-                                <th>industry</th>
-                                <th>abstract</th>
-                                <th>studentNames</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                
-                        </tbody>
-                    </table>
-                </div>
-                <script> $('#fourthClick').hide();</script>
 
-                <div id='fifthClick'>
-                    <table id="example" border="1" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>yearSemester</th>
-                                <th>class</th>
-                                <th>teamNumber</th>
-                                <th>teamName</th>
-                                <th>projectTitle</th>
-                                <th>organization</th>
-                                <th>industry</th>
-                                <th>abstract</th>
-                                <th>studentNames</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                
-                        </tbody>
-                    </table>
-                </div>
-                <script> $('#fifthClick').hide();</script>
     <!-- </div>-->
 
-
     <div class="social-icons">
-        <button class="hide" id='hide'>Hide Row</button> 
-        <button class="show" id='show'>Show Row</button> 
-        <button class="merge" id='merge'>Merge</button> 
-        <button class="newsearch" id='newsearch'>New Search</button> 
-        <!--<button onclick="myFunction()">New Search</button>-->
+        <button class="hide" id='hide'>Hide Row</button>
 
+        <button class="show" id='show'>Show Row</button> 
+
+        <button class="merge" id='merge'>Merge</button>
+
+        <!--<button class="newsearch" id='newsearch'>New Search</button> -->
+        <button class="newsearch" onClick="onClick()">New Search</button>
+        <div id='numClicked'>
+        <p>Clicks: <a id="clicks">0</a></p>
+        </div>
+        <script> $('#numClicked').hide();</script>
+        <!--<button onclick="myFunction()">New Search</button>-->
 
     </div>
 
@@ -218,16 +182,6 @@
 
 <script>
 
-    /*function format(f) {
-        // `d` is the original data object for the row
-        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-            '<tr>' +
-            '<td>Abstract:</td>' +
-            '<td>' + f.abstract + '</td>' +
-            '</tr>' +
-            '</table>';
-    }*/
-
     $(function () {
         var projects = [];
         //$(document).ready(function () {
@@ -237,32 +191,8 @@
                 //});
                 $(tblRow).appendTo("#example tbody");
 
-
-
             });
-            /*DataTables instantiation.*/
-            //$("#example").DataTable();
             var oTable;
-
-            /*$('#example tbody').on('click', 'td.dt-control', function () {
-                var tr = $(this).closest('tr');
-                var row = oTable.row(tr);
-
-                console.log("It worked!");
-
-                if (row.child.isShown()) {
-                    // This row is already open - close it
-                    row.child.hide();
-                    tr.removeClass('shown');
-                }
-                else {
-                    // Open this row
-                    row.child(format(row.data())).show();
-                    tr.addClass('shown');
-                }
-                //console.log("It worked!");
-            });*/
-
             /* Add a click handler to the rows - this could be used as a callback */
             $("#example tbody tr").click(function (e) {
                 if ($(this).hasClass('row_selected')) {
@@ -274,15 +204,14 @@
                 }
             });
 
-            /* Add a click handler for the delete row */
             $('#hide').click(function () {
                 var anSelected = fnGetSelected(oTable);
-                $(anSelected).hide();
+                $(".row_selected,.temp").hide();
             });
 
             $('#show').click(function () {
                 var anSelected = fnGetSelected(oTable);
-                $(anSelected).show();
+                $(".row_selected,.temp").show();
             });
 
             $('#merge').click(function () {
@@ -291,33 +220,45 @@
                 $("tr:not(.row_selected,.temp)").hide();
             });
 
-            $('#newsearch').click(function () {
-                //$('#example').dataTable();
-                //if clicked first time (meaning second table should be showing)
-                $('#fisrtClick').show();
-                $('table.display').DataTable(); //display second table with atrributes same as first 
-                console.log("It worked!"); // message showing that code was executed 
-
-                //if clicked a second time (3rd table )
-                //show secondClicked table 
-                //however will this still leave the first and econd table 
-            });
-
+            //oTable = $('#example').dataTable();
             oTable = $('#example').DataTable({
                 stateSave: true
             });
 
 
-            /* Get the rows which are currently selected */
+            //Get the rows which are currently selected 
             function fnGetSelected(oTableLocal) {
                 return oTableLocal.$('tr.row_selected');
             }
-
-
-        });
+        }); 
 
     });
 
-
-
 </script>
+
+    <script>
+        var clicks = 0;
+        function onClick() {
+            clicks++;
+            document.getElementById("clicks").innerHTML = clicks;
+
+            if (clicks == 1) {
+                $('#fisrtClick').show();
+                $('table.display').DataTable(); //display second table with atrributes same as first
+                console.log("It worked!"); // message showing that code was executed
+            }
+
+            if (clicks == 2) {
+                $('#secondClick').show();
+                //$('table.display').DataTable(); 
+                console.log("second worked!"); 
+            }
+
+            if (clicks == 3) {
+                $('#thirdClick').show();
+                //$('table.display').DataTable(); 
+                console.log("third worked!"); 
+            }
+        };
+
+    </script>
