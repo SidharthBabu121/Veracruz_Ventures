@@ -11,7 +11,7 @@ with open ("/Users/fabiolapineda/Desktop/ProjectList.csv", "r") as f:
     next(reader)
     data = {"projects": []}
     for row in reader:
-        data["projects"].append({"yearSemester":row[0],"class":row[1],"teamNumber":row[2],"teamName":row[3],"projectTitle":row[4],"organization":row[5],"industry":row[6],"abstract":row[7],"studentNames":row[8]})
+        data["projects"].append({"yearSemester":row[0],"class":row[1],"teamNumber":row[2],"teamName":row[3],"projectTitle":row[4]})
 
 with open ("CSVdata.json","w") as f:
     json.dump(data, f, indent=4)

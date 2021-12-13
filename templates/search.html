@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Navbar</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
 
     <!-- This is the STYLE for the HEADER -->
     <!-- w3school AND https://code.jquery.com/ -->
@@ -19,13 +24,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
     <!-- Data Table -->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src=https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js></script>
 
 
-    <!-- <script src=../../media/js/jquery.dataTables.js></script>-->
+    <!--<script src=../../media/js/jquery.dataTables.js></script>-->
 
     <link href="/static/rowSeleted.css" rel="stylesheet" />
 
@@ -63,35 +74,121 @@
     <!-- <section></section> -->
 
     <br /><br />
-    <!-- cellpadding="0" cellspacing="0"-->
-    <!-- <div class="container">-->
-    <table cellpadding="0" cellspacing="0" border="1" id="example" class="display" style="width:100%">
+    <table id="example" class="table table-striped table-bordered">
         <thead>
-            <!-- HEADING FORMATION -->
             <tr>
                 <th>yearSemester</th>
                 <th>class</th>
                 <th>teamNumber</th>
                 <th>teamName</th>
                 <th>projectTitle</th>
-                <th>organization</th>
-                <th>industry</th>
-                <th>abstract</th>
-                <th>studentNames</th>
+
             </tr>
         </thead>
         <tbody>
 
         </tbody>
     </table>
-    <!-- </div>-->
+    <p>&nbsp;</p>
+
+    <div id='fisrtClick'>
+        <table id="first" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>yearSemester</th>
+                    <th>class</th>
+                    <th>teamNumber</th>
+                    <th>teamName</th>
+                    <th>projectTitle</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+    <script> $('#fisrtClick').hide(); </script>
+
+    <div id='secondClick'>
+        <table id="second" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>yearSemester</th>
+                    <th>class</th>
+                    <th>teamNumber</th>
+                    <th>teamName</th>
+                    <th>projectTitle</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+    <script> $('#secondClick').hide();</script>
+
+    <div id='thirdClick'>
+        <table id="third" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>yearSemester</th>
+                    <th>class</th>
+                    <th>teamNumber</th>
+                    <th>teamName</th>
+                    <th>projectTitle</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+    <script> $('#thirdClick').hide();</script>
+
+    <div id='mergeClick'>
+        <h1>Merged Results:</h1>
+        <table id="mergeTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>yearSemester</th>
+                    <th>class</th>
+                    <th>teamNumber</th>
+                    <th>teamName</th>
+                    <th>projectTitle</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+    <script> $('#mergeClick').hide();</script>
 
 
     <div class="social-icons">
-        <a button class="hide" id='hide'>Hide Row</button> </a>
-        <a button class="show" id='show'>Show Row</button> </a>
-        <a button class="merge" id='merge'>Merge</button> </a>
-        <a button class="newsearch" id='newsearch'>New Search</button> </a>
+        <button class="hide" id='hide'>Hide Row</button>
+
+        <button type="button" id='undo'>Undo Hide</button>
+
+        <button class="show" id='show'>Show Row</button>
+
+        <button class="merge" id='merge'>Merge</button>
+
+        <!--<button class="newsearch" id='newsearch'>New Search</button> -->
+        <button class="newsearch" onClick="onClick()">New Search</button>
+        <div id='numClicked'>
+            <p>Clicks: <a id="clicks">0</a></p>
+        </div>
+        <script> $('#numClicked').hide();</script>
+        <!--<button onclick="myFunction()">New Search</button>-->
+
     </div>
 
 
@@ -102,69 +199,158 @@
 <script>
 
     $(function () {
+
         var projects = [];
-        //$(document).ready(function () {
         $.getJSON("http://127.0.0.1:5500/CSVdata.json", function (data) {
             $.each(data.projects, function (i, f) {
-                var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</td>' + '<td>' + f.organization + '</td>' + '<td>' + f.industry + '</td>' + '<td>' + f.abstract + '</td>' + '<td>' + f.studentNames + '</td>' + '</tr>'
+                var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</tr>'
                 //});
-                $(tblRow).appendTo("#example tbody");
+                //$(tblRow).appendTo("#example tbody");
+                $(tblRow).appendTo("table tbody");
+
             });
-            /*DataTables instantiation.*/
-            //$("#example").DataTable();
             var oTable;
+            var mmTable;
 
             /* Add a click handler to the rows - this could be used as a callback */
-            $("#example tbody tr").click(function (e) {
+            //$("#example tbody tr").click(function (e) {
+            $("table tbody tr").click(function (e) {
                 if ($(this).hasClass('row_selected')) {
                     $(this).removeClass('row_selected');
                 }
                 else {
-                    oTable.$('tr.row_selected') //.removeClass('row_selected');
+                    oTable.$('tr.row_selected')
                     $(this).addClass('row_selected');
                 }
             });
 
-
-            /* Add a click handler for the delete row */
             $('#hide').click(function () {
-                var anSelected = fnGetSelected(oTable);
-                $(anSelected).hide();
+                //var anSelected = fnGetSelected(oTable);
+                $(".row_selected,.temp").hide();
+
+            });
+
+            $('#undo').click(function () {
+                //var anSelected = fnGetSelected(oTable);
+                $(".row_selected,.temp").show();
             });
 
             $('#show').click(function () {
-                var anSelected = fnGetSelected(oTable);
-                $(anSelected).show();
+                //var anSelected = fnGetSelected(oTable);
+                $("tr:not(.row_selected,.temp)").hide();
             });
 
-            //$('#newsearch').click(function () {
-            /*<button onclick="myFunction()">New Search</button>
- 
-                //$('table.display').DataTable();
-                //console.log("It worked!");
- 
-                function myFunction() {
-                    var x = document.getElementById("example");
-                    //x.deleteRow(0);
-                    //$('#example').DataTable();
-                    $('table.display').DataTable();
-                    console.log("It worked!");
-                }*/
+            $('#merge').click(function () {
+                $('#mergeClick').show();
+                var selectedData;
+                var secData;
+                var fullMerge;
+                var thData;
+                var fivData;
 
+                if (clicks == 0) {
+                    selectedData = oTable.rows('.row_selected,.temp').data().toArray();
+                    /*mmTable.destroy();
+                    mmTable = $('#mergeTable').DataTable({
+                        data: selectedData,
+                    });*/
+                }
 
-            /* Init the table */
-            oTable = $('#example').dataTable();
+                if (clicks == 1) {
+                    selectedData = oTable.rows('.row_selected,.temp').data().toArray();
+                    secData = oTable1.rows('.row_selected,.temp').data().toArray();
+                    fullMerge = selectedData.concat(secData);
 
+                    mmTable.destroy();
+                    mmTable = $('#mergeTable').DataTable({
+                        data: fullMerge,
+                    });
+                }
 
+                if (clicks == 2) {
+                    selectedData = oTable.rows('.row_selected,.temp').data().toArray();
+                    secData = oTable1.rows('.row_selected,.temp').data().toArray();
+                    fullMerge = selectedData.concat(secData);
+                    thData = oTable2.rows('.row_selected,.temp').data().toArray();
+                    fullMerge = fullMerge.concat(thData);
 
-            /* Get the rows which are currently selected */
+                    mmTable.destroy();
+                    mmTable = $('#mergeTable').DataTable({
+                        data: fullMerge,
+                    });
+                }
+
+                if (clicks == 3) {
+                    selectedData = oTable.rows('.row_selected,.temp').data().toArray();
+                    secData = oTable1.rows('.row_selected,.temp').data().toArray();
+                    fullMerge = selectedData.concat(secData);
+                    thData = oTable2.rows('.row_selected,.temp').data().toArray();
+                    fullMerge = fullMerge.concat(thData);
+                    fivData = oTable3.rows('.row_selected,.temp').data().toArray();
+                    fullMerge = fullMerge.concat(fivData);
+
+                    mmTable.destroy();
+                    mmTable = $('#mergeTable').DataTable({
+                        data: fullMerge,
+                    });
+                }
+
+            });
+
+            //oTable = $('#example').DataTable();
+            oTable = $('#example').DataTable({
+                stateSave: true,
+            });
+
+            oTable1 = $('#first').DataTable({
+                stateSave: true,
+            });
+
+            oTable2 = $('#second').DataTable({
+                stateSave: true,
+            });
+
+            oTable3 = $('#third').DataTable({
+                stateSave: true,
+            });
+
+            mmTable = $('#mergeTable').DataTable({
+                stateSave: true,
+            });
+
+            //Get the rows which are currently selected 
             function fnGetSelected(oTableLocal) {
                 return oTableLocal.$('tr.row_selected');
             }
 
-
         });
 
     });
+
+</script>
+
+<script>
+
+    var clicks = 0;
+    function onClick() {
+        clicks++;
+        document.getElementById("clicks").innerHTML = clicks;
+
+        if (clicks == 1) {
+            $('#fisrtClick').show();
+            $('table.display').DataTable(); 
+            console.log("It worked!"); 
+        }
+
+        if (clicks == 2) {
+            $('#secondClick').show();
+            console.log("second worked!");
+        }
+
+        if (clicks == 3) {
+            $('#thirdClick').show();
+            console.log("third worked!");
+        }
+    };
 
 </script>

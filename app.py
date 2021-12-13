@@ -14,7 +14,9 @@ def home():
 @app.route('/search', methods = ['GET', 'POST'])
 def search():
     #return 0
-    return render_template('searchTwoTables.html')
+    #return render_template('stateSaving.html')
+    #return render_template('Storage.html')
+    return render_template('search.html')
 
 @app.route('/contact')
 def contact():
