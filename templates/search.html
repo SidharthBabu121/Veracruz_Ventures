@@ -76,7 +76,7 @@
     <br /><br />
     <table id="example" class="table table-striped table-bordered">
         <thead>
-            <tr>
+            <tr class="temp">
                 <th>yearSemester</th>
                 <th>class</th>
                 <th>teamNumber</th>
@@ -94,7 +94,7 @@
     <div id='fisrtClick'>
         <table id="first" class="table table-striped table-bordered">
             <thead>
-                <tr>
+                <tr class="temp">
                     <th>yearSemester</th>
                     <th>class</th>
                     <th>teamNumber</th>
@@ -114,7 +114,7 @@
     <div id='secondClick'>
         <table id="second" class="table table-striped table-bordered">
             <thead>
-                <tr>
+                <tr class="temp">
                     <th>yearSemester</th>
                     <th>class</th>
                     <th>teamNumber</th>
@@ -134,7 +134,7 @@
     <div id='thirdClick'>
         <table id="third" class="table table-striped table-bordered">
             <thead>
-                <tr>
+                <tr class="temp">
                     <th>yearSemester</th>
                     <th>class</th>
                     <th>teamNumber</th>
@@ -154,7 +154,7 @@
         <h1>Merged Results:</h1>
         <table id="mergeTable" class="table table-striped table-bordered">
             <thead>
-                <tr>
+                <tr class="temp">
                     <th>yearSemester</th>
                     <th>class</th>
                     <th>teamNumber</th>
@@ -226,13 +226,13 @@
 
             $('#hide').click(function () {
                 //var anSelected = fnGetSelected(oTable);
-                $(".row_selected,.temp").hide();
+                $(".row_selected").hide();
 
             });
 
             $('#undo').click(function () {
                 //var anSelected = fnGetSelected(oTable);
-                $(".row_selected,.temp").show();
+                $(".row_selected").show();
             });
 
             $('#show').click(function () {
