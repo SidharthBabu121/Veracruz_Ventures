@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Navbar</title>
+
     <style>
         h1 {
             text-align: center;
@@ -27,21 +28,25 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
     <!-- Data Table -->
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
 
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src=https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js></script>
 
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
 
     <!--<script src=../../media/js/jquery.dataTables.js></script>-->
+    <!--<script src="/media/js/jquery.dataTables.js"></script>-->
 
     <link href="/static/rowSeleted.css" rel="stylesheet" />
 
     <!--<script src="/static/main.js"></script>-->
-
 
     <script>
         $(document).ready(function () {
@@ -74,22 +79,25 @@
     <!-- <section></section> -->
 
     <br /><br />
-    <table id="example" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>yearSemester</th>
-                <th>class</th>
-                <th>teamNumber</th>
-                <th>teamName</th>
-                <th>projectTitle</th>
+    <div id='Original'>
+        <table id="example" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>yearSemester</th>
+                    <th>class</th>
+                    <th>teamNumber</th>
+                    <th>teamName</th>
+                    <th>projectTitle</th>
 
-            </tr>
-        </thead>
-        <tbody>
+                </tr>
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
-    <p>&nbsp;</p>
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+
 
     <div id='fisrtClick'>
         <table id="first" class="table table-striped table-bordered">
@@ -189,6 +197,8 @@
         <script> $('#numClicked').hide();</script>
         <!--<button onclick="myFunction()">New Search</button>-->
 
+        <button class="Delete localstorage" onclick="deleteData()">Delete Changes</button>
+
     </div>
 
 
@@ -197,139 +207,175 @@
 </html>
 
 <script>
-
+    var fullMerge;
     $(function () {
+        var storedValues;
 
-        var projects = [];
-        $.getJSON("http://127.0.0.1:5500/CSVdata.json", function (data) {
-            $.each(data.projects, function (i, f) {
-                var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</tr>'
-                //});
-                //$(tblRow).appendTo("#example tbody");
-                $(tblRow).appendTo("table tbody");
+        if (localStorage.getItem('fullMerge')) {
+            $('#Original').hide();
+            $('#mergeClick').show();
+            $('#merge').hide();
+            $('#hide').hide();
+            $('#undo').hide();
+            $('#show').hide();
+            $('.newsearch').hide();
 
-            });
-            var oTable;
-            var mmTable;
-
-            /* Add a click handler to the rows - this could be used as a callback */
-            //$("#example tbody tr").click(function (e) {
-            $("table tbody tr").click(function (e) {
-                if ($(this).hasClass('row_selected')) {
-                    $(this).removeClass('row_selected');
-                }
-                else {
-                    oTable.$('tr.row_selected')
-                    $(this).addClass('row_selected');
-                }
-            });
-
-            $('#hide').click(function () {
-                //var anSelected = fnGetSelected(oTable);
-                $(".row_selected,.temp").hide();
-
-            });
-
-            $('#undo').click(function () {
-                //var anSelected = fnGetSelected(oTable);
-                $(".row_selected,.temp").show();
-            });
-
-            $('#show').click(function () {
-                //var anSelected = fnGetSelected(oTable);
-                $("tr:not(.row_selected,.temp)").hide();
-            });
-
-            $('#merge').click(function () {
-                $('#mergeClick').show();
-                var selectedData;
-                var secData;
-                var fullMerge;
-                var thData;
-                var fivData;
-
-                if (clicks == 0) {
-                    selectedData = oTable.rows('.row_selected,.temp').data().toArray();
-                    /*mmTable.destroy();
-                    mmTable = $('#mergeTable').DataTable({
-                        data: selectedData,
-                    });*/
-                }
-
-                if (clicks == 1) {
-                    selectedData = oTable.rows('.row_selected,.temp').data().toArray();
-                    secData = oTable1.rows('.row_selected,.temp').data().toArray();
-                    fullMerge = selectedData.concat(secData);
-
-                    mmTable.destroy();
-                    mmTable = $('#mergeTable').DataTable({
-                        data: fullMerge,
-                    });
-                }
-
-                if (clicks == 2) {
-                    selectedData = oTable.rows('.row_selected,.temp').data().toArray();
-                    secData = oTable1.rows('.row_selected,.temp').data().toArray();
-                    fullMerge = selectedData.concat(secData);
-                    thData = oTable2.rows('.row_selected,.temp').data().toArray();
-                    fullMerge = fullMerge.concat(thData);
-
-                    mmTable.destroy();
-                    mmTable = $('#mergeTable').DataTable({
-                        data: fullMerge,
-                    });
-                }
-
-                if (clicks == 3) {
-                    selectedData = oTable.rows('.row_selected,.temp').data().toArray();
-                    secData = oTable1.rows('.row_selected,.temp').data().toArray();
-                    fullMerge = selectedData.concat(secData);
-                    thData = oTable2.rows('.row_selected,.temp').data().toArray();
-                    fullMerge = fullMerge.concat(thData);
-                    fivData = oTable3.rows('.row_selected,.temp').data().toArray();
-                    fullMerge = fullMerge.concat(fivData);
-
-                    mmTable.destroy();
-                    mmTable = $('#mergeTable').DataTable({
-                        data: fullMerge,
-                    });
-                }
-
-            });
-
-            //oTable = $('#example').DataTable();
-            oTable = $('#example').DataTable({
-                stateSave: true,
-            });
-
-            oTable1 = $('#first').DataTable({
-                stateSave: true,
-            });
-
-            oTable2 = $('#second').DataTable({
-                stateSave: true,
-            });
-
-            oTable3 = $('#third').DataTable({
-                stateSave: true,
-            });
+            storedValues = JSON.parse(localStorage.getItem('fullMerge'));
 
             mmTable = $('#mergeTable').DataTable({
-                stateSave: true,
+                data: storedValues
             });
+        }
+        else {
 
-            //Get the rows which are currently selected 
-            function fnGetSelected(oTableLocal) {
-                return oTableLocal.$('tr.row_selected');
-            }
+            var projects = [];
+            $.getJSON("http://127.0.0.1:5500/CSVdata.json", function (data) {
+                $.each(data.projects, function (i, f) {
+                    var tblRow = '<tr>' + '<td>' + f.yearSemester + '</td>' + '<td>' + f.class + '</td>' + '<td>' + f.teamNumber + '</td>' + '<td>' + f.teamName + '</td>' + '<td>' + f.projectTitle + '</tr>'
+                    //$(tblRow).appendTo("#example tbody");
+                    $(tblRow).appendTo("table tbody");
 
-        });
+                });
 
+                var oTable;
+                var mmTable;
+
+                oTable = $('#example').DataTable({
+                    stateSave: true,
+                });
+
+                oTable1 = $('#first').DataTable({
+                    stateSave: true,
+                });
+
+                oTable2 = $('#second').DataTable({
+                    stateSave: true,
+                });
+
+                oTable3 = $('#third').DataTable({
+                    stateSave: true,
+                });
+
+
+                mmTable = $('#mergeTable').DataTable({
+                    stateSave: true,
+                });
+
+                /* Add a click handler to the rows - this could be used as a callback */
+                //$("#example tbody tr").click(function (e) {
+                $("table tbody tr").click(function (e) {
+                    if ($(this).hasClass('row_selected')) {
+                        $(this).removeClass('row_selected');
+                    }
+                    else {
+                        oTable.$('tr.row_selected')
+                        $(this).addClass('row_selected');
+                    }
+                });
+
+                $('#hide').click(function () {
+                    //var anSelected = fnGetSelected(oTable);
+                    $(".row_selected,.temp").hide();
+
+                });
+
+                $('#undo').click(function () {
+                    //var anSelected = fnGetSelected(oTable);
+                    $(".row_selected,.temp").show();
+                });
+
+                $('#show').click(function () {
+                    //var anSelected = fnGetSelected(oTable);
+                    $("tr:not(.row_selected,.temp)").hide();
+                });
+
+                $('#merge').click(function () {
+                    $('#mergeClick').show();
+                    var selectedData;
+                    var secData;
+                    var thData;
+                    var fivData;
+
+                    if (clicks == 0) {
+                        selectedData = oTable.rows('.row_selected,.temp').data().toArray();
+                    }
+
+                    if (clicks == 1) {
+                        selectedData = oTable.rows('.row_selected,.temp').data().toArray();
+                        secData = oTable1.rows('.row_selected,.temp').data().toArray();
+                        fullMerge = selectedData.concat(secData);
+
+                        mmTable.destroy();
+                        mmTable = $('#mergeTable').DataTable({
+                            data: fullMerge
+                        });
+
+                        //if (!localStorage.getItem('fullMerge')) {
+                        localStorage.setItem('fullMerge', JSON.stringify(fullMerge));
+                        //}
+
+                        storedValues = JSON.parse(localStorage.getItem('fullMerge'));
+                        console.log(storedValues);
+
+
+                    }
+
+                    if (clicks == 2) {
+                        selectedData = oTable.rows('.row_selected,.temp').data().toArray();
+                        secData = oTable1.rows('.row_selected,.temp').data().toArray();
+                        fullMerge = selectedData.concat(secData);
+                        thData = oTable2.rows('.row_selected,.temp').data().toArray();
+                        fullMerge = fullMerge.concat(thData);
+
+                        mmTable.destroy();
+                        mmTable = $('#mergeTable').DataTable({
+                            data: fullMerge
+                        });
+
+                        localStorage.setItem('fullMerge', JSON.stringify(fullMerge));
+                        storedValues = JSON.parse(localStorage.getItem('fullMerge'));
+                        console.log(storedValues);
+                    }
+
+                    if (clicks == 3) {
+                        selectedData = oTable.rows('.row_selected,.temp').data().toArray();
+                        secData = oTable1.rows('.row_selected,.temp').data().toArray();
+                        fullMerge = selectedData.concat(secData);
+                        thData = oTable2.rows('.row_selected,.temp').data().toArray();
+                        fullMerge = fullMerge.concat(thData);
+                        fivData = oTable3.rows('.row_selected,.temp').data().toArray();
+                        fullMerge = fullMerge.concat(fivData);
+
+                        mmTable.destroy();
+                        mmTable = $('#mergeTable').DataTable({
+                            data: fullMerge
+                        });
+                    }
+
+                    localStorage.setItem('fullMerge', JSON.stringify(fullMerge));
+                    storedValues = JSON.parse(localStorage.getItem('fullMerge'));
+                    console.log(storedValues);
+
+                });
+
+                //Get the rows which are currently selected 
+                function fnGetSelected(oTableLocal) {
+                    return oTableLocal.$('tr.row_selected');
+                }
+
+            });
+        }
     });
+
 
 </script>
 
 <script>
+
+    function deleteData() {
+        localStorage.clear()
+        location.reload(true);
+    }
 
     var clicks = 0;
     function onClick() {
@@ -338,8 +384,9 @@
 
         if (clicks == 1) {
             $('#fisrtClick').show();
-            $('table.display').DataTable(); 
-            console.log("It worked!"); 
+            $('table.display').DataTable();
+            //$('#first').DataTable();
+            console.log("It worked!");
         }
 
         if (clicks == 2) {
